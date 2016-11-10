@@ -89,6 +89,6 @@ namespace BL.Services.Albums
         /// Adds an album
         /// </summary>
         /// <param name="albumDTO">Album details</param>
-        void AddAlbum(AlbumDTO reviewDTO);
+        void AddAlbum(AlbumDTO albumDTO);
     }
 }

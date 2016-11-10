@@ -64,7 +64,7 @@ namespace BL.Bootstrap
                             .ReverseMap();
 
                 config.CreateMap<Client, ClientDTO>()
-                    .ForMember(clientDTO => clientDTO.UserAccountID, opts => opts.MapFrom(client => client.Account.Email))
+                    .ForMember(clientDTO => clientDTO.UserAccountID, opts => opts.MapFrom(client => client.Account.ID))
                     //.ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.Account.Email))
                     //.ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.Account.FirstName))
                     //.ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.Account.LastName))

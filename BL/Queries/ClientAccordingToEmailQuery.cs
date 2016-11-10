@@ -30,8 +30,7 @@ namespace BL.Queries
             {
                 return new EnumerableQuery<ClientDTO>(new List<ClientDTO>());
             }
-
-           
+            
             var clientDTO = AutoMapper.Mapper.Map<ClientDTO>(client);
 
             return new EnumerableQuery<ClientDTO>(new List<ClientDTO> { clientDTO });

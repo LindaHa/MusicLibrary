@@ -58,6 +58,8 @@ namespace DAL.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
                         Account_Key = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)

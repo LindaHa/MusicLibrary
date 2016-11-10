@@ -84,13 +84,9 @@
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\Songlist.cs" />
     <Compile Include="Entities\Client.cs" />
-    <Compile Include="Migrations\201611101110560_First.cs" />
-    <Compile Include="Migrations\201611101110560_First.Designer.cs">
-      <DependentUpon>201611101110560_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611101114300_Second.cs" />
-    <Compile Include="Migrations\201611101114300_Second.Designer.cs">
-      <DependentUpon>201611101114300_Second.cs</DependentUpon>
+    <Compile Include="Migrations\201611101419220_First.cs" />
+    <Compile Include="Migrations\201611101419220_First.Designer.cs">
+      <DependentUpon>201611101419220_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MusicLibraryDbContext.cs" />
@@ -114,11 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611101110560_First.resx">
-      <DependentUpon>201611101110560_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611101114300_Second.resx">
-      <DependentUpon>201611101114300_Second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611101419220_First.resx">
+      <DependentUpon>201611101419220_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
