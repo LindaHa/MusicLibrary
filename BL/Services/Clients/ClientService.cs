@@ -90,7 +90,7 @@ namespace BL.Services.Clients
             }
         }
 
-        public void EditClient(ClientDTO clientDTO, params int [] songlistIDs)
+        public void EditClient(ClientDTO clientDTO, List<int> songlistIDs)
         {
             if (clientDTO == null)
                 throw new ArgumentNullException("Client service - EditClient(...)clientDTO cannot be null");
@@ -180,7 +180,7 @@ namespace BL.Services.Clients
                 songlistListQuery.Take = SonglistsPageSize;
 
                 var sortSonglist = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
-                songlistListQuery.AddSortCriteria("Issued", sortSonglist);
+                songlistListQuery.AddSortCriteria(songlist => songlist.Name, sortSonglist);
 
                 return songlistListQuery.Execute();
             }

@@ -15,7 +15,7 @@ namespace BL.DTOs.Songlists
         [MaxLength(256)]
         public string Name { get; set; }
 
-        public int[] SongIDs { get; set; }
+        public List<int> SongIDs { get; set; }
 
         [Required]
         public int OwnerID { get; set; }

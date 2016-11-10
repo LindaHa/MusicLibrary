@@ -27,7 +27,7 @@ namespace BL.Services.Artists
         /// Updates Artist according to ID
         /// </summary>
         /// <param name="ArtistDTO">artist details</param>
-        void EditArtist(ArtistDTO artistDTO, params int[] albumIds);
+        void EditArtist(ArtistDTO artistDTO, List<int> albumIds);
 
         /// <summary>
         /// Removes artist according to ID

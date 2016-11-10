@@ -9,7 +9,7 @@ namespace BL.DTOs.Filters
     public class Song_SonglistFilter
     {
         public int SonglistID { get; set; }
-        public int[] CreatorIDs { get; set; }
+        public List<int> CreatorIDs { get; set; }
         public int SongID { get; set; }
     }
 }

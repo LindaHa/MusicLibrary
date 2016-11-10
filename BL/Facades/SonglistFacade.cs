@@ -33,7 +33,7 @@ namespace BL.Repositories
             songlistService.CreateSonglist(songlist);
         }
 
-        public void EditSonglist(SonglistDTO songlistDTO, params int[] songIds)
+        public void EditSonglist(SonglistDTO songlistDTO, List<int> songIds)
         {
             songlistService.EditSonglist(songlistDTO, songIds);
         }

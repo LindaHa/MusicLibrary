@@ -24,11 +24,11 @@ namespace BL.Queries
                                                 .Include(nameof(AlbumReview.Album))
                                                 .Include(nameof(AlbumReview.Creator));
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 query = query.Where(album => Filter.CreatorIDs.Contains(album.Creator.ID));
             }
-            if (Filter.AlbumID > 0)
+            if (Filter?.AlbumID > 0)
             {
                 query = query.Where(review => review.Album.ID == Filter.AlbumID);
             }

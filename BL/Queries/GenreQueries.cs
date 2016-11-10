@@ -23,11 +23,11 @@ namespace BL.Queries
             IQueryable<Genre> queryGenre = Context.Genres
                 .Include(nameof(Genre.Creator));
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 queryGenre = queryGenre.Where(genre => Filter.CreatorIDs.Contains(genre.Creator.ID));
             }
-            if (!string.IsNullOrEmpty(Filter.Name))
+            if (!string.IsNullOrEmpty(Filter?.Name))
             {
                 queryGenre = queryGenre.Where(genre => genre.Name.ToLower().Contains(Filter.Name.ToLower()));
             }

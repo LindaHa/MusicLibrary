@@ -39,6 +39,7 @@ namespace BL.Services.Genres
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var genre = Mapper.Map<Genre>(genreDTO);
+                genre.Creator = GetGenreCreator(genreDTO.CreatorID);
 
                 genreRepository.Insert(genre);
                 uow.Commit();
@@ -90,10 +91,7 @@ namespace BL.Services.Genres
             {
                 genreListQuery.Filter = new GenreFilter { Name = name };
                 var genre = genreListQuery.Execute().SingleOrDefault();
-
-                if(genre.ID < 1)
-                    throw new ArgumentOutOfRangeException("Genre Service - GetGenreIdByName(...) genreId cannot be lesser than 1");
-
+                
                 return genre?.ID ?? 0;
             }
         }
@@ -116,6 +114,7 @@ namespace BL.Services.Genres
                 query.Take = PageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
+                query.AddSortCriteria(genre => genre.Name, sortOrder);
 
                 return new GenreListQueryResultDTO
                 {

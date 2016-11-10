@@ -43,7 +43,8 @@ namespace BL.Bootstrap
                             .ForMember(genre_albumDTO => genre_albumDTO.GenreID, option => option.MapFrom(genre_album => genre_album.Genre.ID))
                             .ReverseMap();
 
-                config.CreateMap<Genre, GenreDTO>().ReverseMap();
+                config.CreateMap<Genre, GenreDTO>()
+                            .ReverseMap();
 
                 config.CreateMap<Song_Songlist, Song_SonglistDTO>()
                             .ForMember(song_songlistDTO => song_songlistDTO.SongID, option => option.MapFrom(song_songlist => song_songlist.Song.ID))
@@ -51,8 +52,7 @@ namespace BL.Bootstrap
                             .ReverseMap();
 
                 config.CreateMap<Songlist, SonglistDTO>()
-                            .ForMember(songlistDTO => songlistDTO.SongIDs, option => option.MapFrom(songlist => songlist.Songs.Select(song => song.ID)))
-                            .ReverseMap();
+                            .ForMember(songlistDTO => songlistDTO.SongIDs, option => option.MapFrom(songlist => songlist.Songs.Select(song => song.ID))).ReverseMap();
 
                 config.CreateMap<SongReview, SongReviewDTO>()
                             .ForMember(songReviewDTO => songReviewDTO.SongID, option => option.MapFrom(songReview => songReview.Song.ID))

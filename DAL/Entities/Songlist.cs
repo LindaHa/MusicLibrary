@@ -18,6 +18,6 @@ namespace DAL.Entities
         public virtual List<Song> Songs { get; set; }
         
         [Required]
-        public Client Owner { get; set; }
+        public virtual Client Owner { get; set; }
     }
 }

@@ -28,24 +28,24 @@ namespace BL.Queries
                                                     .Include(nameof(Genre_Album.Album))
                                                     .Include(nameof(Genre_Album.Genre));
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 queryAlbum = queryAlbum.Where(album => Filter.CreatorIDs.Contains(album.Creator.ID));
             }
-            if (Filter.GenreIDs != null && Filter.GenreIDs.Any())
+            if (Filter?.GenreIDs != null && Filter.GenreIDs.Any())
             {
                 queryGenre_album = queryGenre_album.Where(g_a => Filter.GenreIDs.Contains(g_a.Genre.ID) && g_a.IsOfficial);
                 queryAlbum = queryAlbum.Where(album => queryGenre_album.Select(g_a => g_a.Album.ID).Contains(album.ID));
             }
-            if (Filter.ArtistIDs != null && Filter.ArtistIDs.Any())
+            if (Filter?.ArtistIDs != null && Filter.ArtistIDs.Any())
             {
                 queryAlbum = queryAlbum.Where(album => Filter.ArtistIDs.Contains(album.Artist.ID) && album.Artist.IsOfficial);
             }
-            if (Filter.MinimalRating > 0)
+            if (Filter?.MinimalRating > 0)
             {
                 queryAlbum = queryAlbum.Where(album => album.Reviews.Average(review => review.UserRating) >= Filter.MinimalRating);
             }
-            if (!string.IsNullOrEmpty(Filter.Name))
+            if (!string.IsNullOrEmpty(Filter?.Name))
             {
                 queryAlbum = queryAlbum.Where(album => album.Name.ToLower().Contains(Filter.Name.ToLower()));
             }

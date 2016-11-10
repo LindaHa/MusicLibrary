@@ -26,15 +26,15 @@ namespace BL.Queries
                                                     .Include(nameof(Song_Songlist.Creator));
 
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 querySong_Songlist = querySong_Songlist.Where(s_s => Filter.CreatorIDs.Contains(s_s.Creator.ID));
             }
-            if (Filter.SongID > 0)
+            if (Filter?.SongID > 0)
             {
                 querySong_Songlist = querySong_Songlist.Where(s_s => Filter.SongID == s_s.Song.ID);
             }
-            if (Filter.SonglistID > 0)
+            if (Filter?.SonglistID > 0)
             {
                 querySong_Songlist = querySong_Songlist.Where(s_s => Filter.SonglistID == s_s.Songlist.ID);
             }

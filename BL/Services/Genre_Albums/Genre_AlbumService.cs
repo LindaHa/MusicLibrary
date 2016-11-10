@@ -125,7 +125,7 @@ namespace BL.Services.Genre_Albums
             {
                 var genre_album = genre_albumRepository.GetByID(genre_albumId);
                 if (genre_album == null)
-                    throw new ArgumentNullException("Genre_AlbumService - GetGenre_Album(...) genre_album cannot be Null");
+                    throw new NullReferenceException("Genre_AlbumService - GetGenre_Album(...) genre_album cannot be Null");
                 return Mapper.Map<Genre_AlbumDTO>(genre_album);
                 ;
             }

@@ -96,7 +96,7 @@ namespace BL.Services.AlbumReviews
                 query.Take = PageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
-
+                query.AddSortCriteria(albumReview => albumReview.ID, sortOrder);
                 return new AlbumReviewListQueryResultDTO
                 {
                     RequestedPage = requiredPage,
@@ -190,9 +190,11 @@ namespace BL.Services.AlbumReviews
         /// </summary>
         /// <param name="filter">product filter</param>
         /// <returns>configured query</returns>
-        private IQuery<AlbumReviewDTO> GetQuery(AlbumReviewFilter filter)
+        private IQuery<AlbumReviewDTO> GetQuery(AlbumReviewFilter filter, int requiredPage = 1)
         {
             var query = albumReviewListQuery;
+            query.Skip = Math.Max(0, requiredPage - 1) * PageSize;
+            query.Take = PageSize;
             query.ClearSortCriterias();
             query.Filter = filter;
             return query;

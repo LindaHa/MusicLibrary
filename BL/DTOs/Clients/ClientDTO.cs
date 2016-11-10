@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BL.DTOs.Clients
@@ -14,7 +15,7 @@ namespace BL.DTOs.Clients
 
         public Guid UserAccountID { get; set; }
 
-        public int[] SonglistIDs { get; set; }
+        public List<int> SonglistIDs { get; set; }
 
         public override string ToString()
         {

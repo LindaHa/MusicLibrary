@@ -29,11 +29,11 @@ namespace BL.Queries
                                                     .Include(g_a => g_a.Album.Artist)
                                                     .Include(nameof(Genre_Album.Genre));
 
-            if (!string.IsNullOrEmpty(Filter.Name))
+            if (!string.IsNullOrEmpty(Filter?.Name))
             {
                 queryArtist = queryArtist.Where(artist => artist.Name.ToLower().Contains(Filter.Name.ToLower()));
             }
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 queryArtist = queryArtist.Where(artist => Filter.CreatorIDs.Contains(artist.Creator.ID));
             }

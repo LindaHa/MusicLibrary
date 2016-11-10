@@ -25,15 +25,15 @@ namespace BL.Queries
                                                     .Include(nameof(Genre_Album.Genre))
                                                     .Include(nameof(Genre_Album.Creator));
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 queryGenre_Album = queryGenre_Album.Where(g_a => Filter.CreatorIDs.Contains(g_a.Creator.ID));
             }
-            if (Filter.GenreID > 0)
+            if (Filter?.GenreID > 0)
             {
                 queryGenre_Album = queryGenre_Album.Where(g_a => Filter.GenreID == g_a.Genre.ID && g_a.IsOfficial);
             }
-            if (Filter.AlbumID > 0)
+            if (Filter?.AlbumID > 0)
             {
                 queryGenre_Album = queryGenre_Album.Where(g_a => Filter.AlbumID == g_a.Album.ID && g_a.IsOfficial);
             }

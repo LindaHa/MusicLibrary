@@ -11,7 +11,7 @@ namespace BL.DTOs.Filters
         public int AlbumID { get; set; }
         public int GenreID { get; set; }
         public bool IsOfficial { get; set; }
-        public int[] CreatorIDs { get; set; }
+        public List<int> CreatorIDs { get; set; }
         public int ArtistID { get; set; }
     }
 }

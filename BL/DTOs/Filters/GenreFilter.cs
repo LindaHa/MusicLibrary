@@ -10,7 +10,7 @@ namespace BL.DTOs.Filters
     {
         public string Name { get; set; }
         public int ArtistID { get; set; }
-        public int[] CreatorIDs { get; set; }
+        public List<int> CreatorIDs { get; set; }
         public bool SortAscending { get; set; }
     }
 }

@@ -66,12 +66,12 @@ namespace BL.Services.Song_Songlists
 
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var gen_al = song_songlistRepository.GetByID(song_songlistId);
-                if (gen_al == null)
+                var s_s = song_songlistRepository.GetByID(song_songlistId);
+                if (s_s == null)
                 {
                     throw new NullReferenceException("Songlist review service - DeleteReview(...) songlist to be deleted is null");
                 }
-                song_songlistRepository.Delete(gen_al);
+                song_songlistRepository.Delete(s_s);
                 uow.Commit();
             };
         }
@@ -104,13 +104,15 @@ namespace BL.Services.Song_Songlists
         {
             if (song_songlistId < 1)
                 throw new ArgumentOutOfRangeException("Song_Songlist Service - GetSong_Songlist(...) song_songlistId cannot be lesser than 1");
-
-            var song_songlist = song_songlistRepository.GetByID(song_songlistId);
-            if (song_songlist == null)
+            using (UnitOfWorkProvider.Create())
             {
-                throw new NullReferenceException("Album_GenreService - GetSong_Songlist(...) the song_songlist is null");
+                var song_songlist = song_songlistRepository.GetByID(song_songlistId);
+                if (song_songlist == null)
+                {
+                    throw new NullReferenceException("Album_GenreService - GetSong_Songlist(...) the song_songlist is null");
+                }
+                return Mapper.Map<Song_SonglistDTO>(song_songlist);
             }
-            return Mapper.Map<Song_SonglistDTO>(song_songlist);
         }
 
 

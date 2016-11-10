@@ -24,15 +24,15 @@ namespace BL.Queries
                                             .Include(nameof(Songlist.Songs))
                                             .Include(nameof(Songlist.Owner));
 
-            if (Filter.OwnerIDs != null && Filter.OwnerIDs.Any())
+            if (Filter?.OwnerIDs != null && Filter.OwnerIDs.Any())
             {
                 querySonglist = querySonglist.Where(songlist => Filter.OwnerIDs.Contains(songlist.Owner.ID));
             }
-            if (Filter.SongID > 0)
+            if (Filter?.SongID > 0)
             {
                 querySonglist = querySonglist.Where(songlist => songlist.Songs.Select(song => song.ID).Contains(Filter.SongID));
             }
-            if (!string.IsNullOrEmpty(Filter.Name))
+            if (!string.IsNullOrEmpty(Filter?.Name))
             {
                 querySonglist = querySonglist.Where(songlist => songlist.Name.ToLower().Contains(Filter.Name.ToLower()));
             }

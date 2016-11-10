@@ -78,7 +78,7 @@ namespace BL.Services.Artists
             }
         }
 
-        public void EditArtist(ArtistDTO artistDTO, params int[] albumIds)
+        public void EditArtist(ArtistDTO artistDTO, List<int> albumIds)
         {
             if (artistDTO == null)
                 throw new ArgumentNullException("Artist service - EditArtist(...) artistDTO cannot be null");
@@ -151,6 +151,7 @@ namespace BL.Services.Artists
                 query.Take = PageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
+                query.AddSortCriteria(artist => artist.Name, sortOrder);
 
                 return new ArtistListQueryResultDTO
                 {
@@ -168,7 +169,7 @@ namespace BL.Services.Artists
             if (artistId < 1)
                 throw new ArgumentOutOfRangeException("Artist service - GetAllAlbumsForArtist(...) artistId cannot be lesser than 1");
 
-            int[] artistIds = new int[] { artistId };
+            List<int> artistIds = new List<int> { artistId };
             using (UnitOfWorkProvider.Create())
             {
                 albumListQuery.Filter = new AlbumFilter { ArtistIDs = artistIds };

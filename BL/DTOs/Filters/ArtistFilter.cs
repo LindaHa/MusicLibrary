@@ -13,7 +13,7 @@ namespace BL.DTOs.Filters
         public bool SortAscending { get; set; }
 
         [Range(0.0, 10.0)]
-        public int[] CreatorIDs { get; set; }
+        public List<int> CreatorIDs { get; set; }
         public double MinimalRating { get; set; }
     }
 }

@@ -59,15 +59,21 @@ namespace BL.Services.Albums
 
                 Song song;
                 AlbumReview review;
-                foreach (int songID in albumDTO.SongIDs)
+                if (albumDTO.SongIDs != null)
                 {
-                    song = GetAlbumSong(songID);
-                    album.Songs.Add(song);
+                    foreach (int songID in albumDTO.SongIDs)
+                    {
+                        song = GetAlbumSong(songID);
+                        album.Songs.Add(song);
+                    }
                 }
-                foreach (int albumID in albumDTO.ReviewIDs)
-                {
-                    review = GetAlbumReview(albumID);
-                    album.Reviews.Add(review);
+                if(albumDTO.ReviewIDs != null)
+                    {
+                    foreach (int albumID in albumDTO.ReviewIDs)
+                    {
+                        review = GetAlbumReview(albumID);
+                        album.Reviews.Add(review);
+                    }
                 }
 
                 album.Creator = GetAlbumCreator(albumDTO.CreatorID);
@@ -89,7 +95,7 @@ namespace BL.Services.Albums
             }
         }
 
-        public void EditAlbum(AlbumDTO albumDTO, int artistId, int[] albumReviewIds, int[] songIDs)
+        public void EditAlbum(AlbumDTO albumDTO, int artistId, List<int> albumReviewIds, List<int> songIDs)
         {
             if (albumDTO == null)
                 throw new ArgumentNullException("Album service - EditAlbum(...) albumDTO cannot be null");
@@ -183,6 +189,7 @@ namespace BL.Services.Albums
                 query.Take = PageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
+                query.AddSortCriteria(album => album.Name, sortOrder);
 
                 return new AlbumListQueryResultDTO
                 {
@@ -243,7 +250,8 @@ namespace BL.Services.Albums
             {
                 var album = Mapper.Map<Album>(albumDTO);
                 album.Artist = GetAlbumArtist(albumDTO.ArtistID);
-                albumRepository.Insert(album);
+                album.Creator = GetAlbumCreator(albumDTO.ID);
+                albumRepository.Update(album);
                 uow.Commit();
             }
         }

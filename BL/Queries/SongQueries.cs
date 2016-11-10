@@ -28,28 +28,28 @@ namespace BL.Queries
                                                     .Include(nameof(Album.Songs))
                                                     .Include(nameof(Album.Artist));
 
-            if (Filter.CreatorIDs != null && Filter.CreatorIDs.Any())
+            if (Filter?.CreatorIDs != null && Filter.CreatorIDs.Any())
             {
                 querySong = querySong.Where(song => Filter.CreatorIDs.Contains(song.Creator.ID));
             }
-            if (Filter.ArtistIDs != null && Filter.ArtistIDs.Any())
+            if (Filter?.ArtistIDs != null && Filter.ArtistIDs.Any())
             {
                 queryAlbum = queryAlbum.Where(album => Filter.ArtistIDs.Contains(album.Artist.ID) && album.IsOfficial);
                 querySong = querySong.Where(song => queryAlbum.Select(album => album.ID).Contains(song.Album.ID));
             }
-            if (Filter.MinimalRating > 0)
+            if (Filter?.MinimalRating > 0)
             {
                 querySong = querySong.Where(song => song.Reviews.Average(review => review.UserRating) >= Filter.MinimalRating);
             }
-            if (Filter.MinimalDuration != null)
+            if (Filter?.MinimalDuration != null)
             {
                 querySong = querySong.Where(song => song.Duration >= Filter.MinimalDuration);
             }
-            if (Filter.MaximalDuration != null)
+            if (Filter?.MaximalDuration != null && Filter.MaximalDuration != new TimeSpan(0,0,0,0))
             {
                 querySong = querySong.Where(song => song.Duration <= Filter.MaximalDuration);
             }
-            if (!string.IsNullOrEmpty(Filter.Name))
+            if (!string.IsNullOrEmpty(Filter?.Name))
             {
                 querySong = querySong.Where(song => song.Name.ToLower().Contains(Filter.Name.ToLower()));
             }

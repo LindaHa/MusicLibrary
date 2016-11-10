@@ -29,7 +29,7 @@ namespace BL.Services.Songs
         /// Updates Song according to ID
         /// </summary>
         /// <param name="SongDTO">song details</param>
-        void EditSong(SongDTO songDTO, int albumId, params int[] songReviewIds);
+        void EditSong(SongDTO songDTO, int albumId, List<int> songReviewIds);
 
         /// <summary>
         /// Removes song according to ID

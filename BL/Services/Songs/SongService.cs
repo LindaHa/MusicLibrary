@@ -51,10 +51,14 @@ namespace BL.Services.Songs
             using (var uow = UnitOfWorkProvider.Create())
             {
                 song.Album = GetSongAlbum(songDTO.AlbumID);
-                foreach (int ID in songDTO.ReviewIDs)
+                song.Creator = clientRepository.GetByID(songDTO.CreatorID);
+                if (songDTO.ReviewIDs != null)
                 {
-                    review = GetSongReview(ID);
-                    song.Reviews.Add(review);
+                    foreach (int ID in songDTO.ReviewIDs)
+                    {
+                        review = GetSongReview(ID);
+                        song.Reviews.Add(review);
+                    }
                 }
 
                 songRepository.Insert(song);
@@ -74,7 +78,7 @@ namespace BL.Services.Songs
             }
         }
 
-        public void EditSong(SongDTO songDTO, int albumId, params int[] songReviewIds)
+        public void EditSong(SongDTO songDTO, int albumId, List<int> songReviewIds)
         {
             if (songDTO == null)
                 throw new ArgumentNullException("Song service - EditSong(...) songDTO cannot be null");
@@ -200,7 +204,7 @@ namespace BL.Services.Songs
             {
                 var song = Mapper.Map<Song>(songDTO);
                 song.Album = GetSongAlbum(songDTO.AlbumID);
-                songRepository.Insert(song);
+                songRepository.Update(song);
                 uow.Commit();
             }
         }

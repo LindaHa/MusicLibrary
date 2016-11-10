@@ -21,7 +21,7 @@ namespace BL.DTOs.Artists
         [Required]
         public bool IsOfficial { get; set; }
 
-        public int[] AlbumIDs { get; set; }
+        public List<int> AlbumIDs { get; set; }
 
         public int CreatorID { get; set; }
 

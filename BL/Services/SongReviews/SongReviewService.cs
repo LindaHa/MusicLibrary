@@ -98,7 +98,7 @@ namespace BL.Services.SongReviews
                 query.Take = ProductsPageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
-
+                query.AddSortCriteria(review => review.ID);
                 return new SongReviewListQueryResultDTO
                 {
                     RequestedPage = requiredPage,

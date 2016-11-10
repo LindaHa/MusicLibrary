@@ -1,7 +1,6 @@
 ﻿using BL.DTOs.Clients;
 using BL.DTOs.Songlists;
 using System.Collections.Generic;
-using BL.DTOs.Clients;
 using System;
 using BL.DTOs.Filters;
 
@@ -25,7 +24,7 @@ namespace BL.Services.Clients
         /// </summary>
         /// <param name="ClientDTO">client details</param>
         /// <param name="songlistIDs">songlist IDs</param>
-        void EditClient(ClientDTO clientDTO, params int[] songlistIDs);
+        void EditClient(ClientDTO clientDTO, List<int> songlistIDs);
 
         /// <summary>
         /// Removes client according to ID

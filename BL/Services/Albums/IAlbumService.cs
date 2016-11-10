@@ -28,7 +28,7 @@ namespace BL.Services.Albums
         /// <param name="albumDTO">album details</param>
         /// <param name="artistId">artist ID</param>
         /// <param name="albumReviewIds">album review IDs</param>
-        void EditAlbum(AlbumDTO albumDTO, int artistId, int[] albumReviewIds, int[] songIds);
+        void EditAlbum(AlbumDTO albumDTO, int artistId, List<int> albumReviewIds, List<int> songIds);
 
         /// <summary>
         /// Removes album according to ID

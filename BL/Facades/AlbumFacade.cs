@@ -50,7 +50,7 @@ namespace BL.Repositories
             albumService.CreateAlbum(album);
         }
 
-        public void EditAlbum(AlbumDTO albumDTO, int artistId, int[] albumReviewIds, int[] songIds)
+        public void EditAlbum(AlbumDTO albumDTO, int artistId, List<int> albumReviewIds, List<int> songIds)
         {
             albumService.EditAlbum(albumDTO, artistId, albumReviewIds, songIds);
         }

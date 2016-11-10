@@ -49,7 +49,7 @@ namespace BL.Repositories
             songService.EditSong(songDTO, songDTO.AlbumID, songDTO.ReviewIDs);
         }
 
-        public void EditSong(SongDTO songDTO, int albumId, params int[] songReviewIds)
+        public void EditSong(SongDTO songDTO, int albumId, List<int> songReviewIds)
         {
             songService.EditSong(songDTO, albumId, songReviewIds);
         }

@@ -15,12 +15,12 @@ namespace BL.DTOs.Albums
         [MaxLength(256)]
         public string Name { get; set; }
 
-        public int[] ReviewIDs { get; set; }
+        public List<int> ReviewIDs { get; set; }
 
         [Required]
         public bool IsOfficial { get; set; }
 
-        public int[] SongIDs { get; set; }
+        public List<int> SongIDs { get; set; }
 
         [Required]
         public int ArtistID { get; set; }

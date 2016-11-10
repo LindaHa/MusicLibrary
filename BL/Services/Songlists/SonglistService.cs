@@ -45,11 +45,16 @@ namespace BL.Services.Songlists
             Songlist songlist = Mapper.Map<Songlist>(songlistDTO);
             using (var uow = UnitOfWorkProvider.Create())
             {
-                foreach (int ID in songlistDTO.SongIDs)
+                if (songlistDTO.SongIDs != null)
                 {
-                    Song song = GetSonglistSong(ID);
-                    songlist.Songs.Add(song);
+                    foreach (int ID in songlistDTO.SongIDs)
+                    {
+                        if (songlist.Songs == null) songlist.Songs = new List<Song>();
+                        Song song = GetSonglistSong(ID);
+                        songlist.Songs.Add(song);
+                    }
                 }
+
                 songlist.Owner = GetSonglistCreator(songlistDTO.OwnerID);
 
                 songlistRepository.Insert(songlist);
@@ -69,9 +74,9 @@ namespace BL.Services.Songlists
             }
         }
 
-        public void EditSonglist(SonglistDTO songlistDTO, params int[] songIds)
+        public void EditSonglist(SonglistDTO songlistDTO, List<int> songIds)
         {
-            if (songlistDTO != null)
+            if (songlistDTO == null)
                 throw new ArgumentNullException("Songlist Service - EditSonglist(...) songlistDTO cannot be null");
 
             using (var uow = UnitOfWorkProvider.Create())
@@ -156,6 +161,7 @@ namespace BL.Services.Songlists
                 query.Take = PageSize;
 
                 var sortOrder = filter.SortAscending ? SortDirection.Ascending : SortDirection.Descending;
+                query.AddSortCriteria(songlist => songlist.Name, sortOrder);
 
                 return new SonglistListQueryResultDTO
                 {

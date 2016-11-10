@@ -47,7 +47,7 @@ namespace BL.Repositories
             artistService.CreateArtist(artist);
         }
 
-        public void EditArtist(ArtistDTO artistDTO, params int[] albumIds)
+        public void EditArtist(ArtistDTO artistDTO, List<int> albumIds)
         {
             artistService.EditArtist(artistDTO, albumIds);
         }

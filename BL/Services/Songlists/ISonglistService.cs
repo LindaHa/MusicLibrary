@@ -27,7 +27,7 @@ namespace BL.Services.Songlists
         /// Updates Songlist according to ID
         /// </summary>
         /// <param name="SonglistDTO">songlist details</param>
-        void EditSonglist(SonglistDTO songlistDTO, params int[] songIds);
+        void EditSonglist(SonglistDTO songlistDTO, List<int> songIds);
 
         /// <summary>
         /// Removes songlist according to ID
