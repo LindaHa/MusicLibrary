@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EBEACF67-D0DC-4474-BD10-9B076ACFA2A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BL</RootNamespace>
+    <AssemblyName>BL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BrockAllen.MembershipReboot, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.8.0.0\lib\net45\BrockAllen.MembershipReboot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BrockAllen.MembershipReboot.Ef, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.Ef.8.0.0\lib\net45\BrockAllen.MembershipReboot.Ef.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppInfrastructure\AppQuery.cs" />
+    <Compile Include="AppInfrastructure\AppUnitOfWork.cs" />
+    <Compile Include="AppInfrastructure\AppUnitOfWorkProvider.cs" />
+    <Compile Include="Bootstrap\BussinessLayerInstaller.cs" />
+    <Compile Include="Bootstrap\MappingInit.cs" />
+    <Compile Include="DTOs\AlbumReviews\AlbumReviewDTO.cs" />
+    <Compile Include="DTOs\AlbumReviews\AlbumReviewListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Albums\AlbumDTO.cs" />
+    <Compile Include="DTOs\Albums\AlbumListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Artists\ArtistListQueryResultDTO.cs" />
+    <Compile Include="Facades\ClientFacade.cs" />
+    <Compile Include="Queries\ClientAccordingToEmailQuery.cs" />
+    <Compile Include="DTOs\Clients\ClientListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Common\PagedListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Filters\AlbumFilter.cs" />
+    <Compile Include="DTOs\Filters\AlbumReviewFilter.cs" />
+    <Compile Include="DTOs\Filters\ArtistFilter.cs" />
+    <Compile Include="DTOs\Filters\GenreFilter.cs" />
+    <Compile Include="DTOs\Filters\Genre_AlbumFilter.cs" />
+    <Compile Include="DTOs\Filters\SongFilter.cs" />
+    <Compile Include="DTOs\Filters\SonglistFilter.cs" />
+    <Compile Include="DTOs\Filters\SongReviewFilter.cs" />
+    <Compile Include="DTOs\Filters\Song_SonglistFilter.cs" />
+    <Compile Include="DTOs\Genres\GenreListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Genres\GenreDTO.cs" />
+    <Compile Include="DTOs\Genre_Albums\Genre_AlbumDTO.cs" />
+    <Compile Include="DTOs\Artists\ArtistDTO.cs" />
+    <Compile Include="DTOs\Songlists\SonglistListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Songlists\SonglistDTO.cs" />
+    <Compile Include="DTOs\SongReviews\SongReviewDTO.cs" />
+    <Compile Include="DTOs\SongReviews\SongReviewListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Songs\SongListQueryResultDTO.cs" />
+    <Compile Include="DTOs\Songs\SongDTO.cs" />
+    <Compile Include="DTOs\Song_Songlists\Song_SonglistDTO.cs" />
+    <Compile Include="DTOs\Clients\ClientDTO.cs" />
+    <Compile Include="Facades\AlbumFacade.cs" />
+    <Compile Include="Facades\ArtistFacade.cs" />
+    <Compile Include="Facades\GenreFacade.cs" />
+    <Compile Include="Facades\Genre_AlbumFacade.cs" />
+    <Compile Include="Facades\SonglistFacade.cs" />
+    <Compile Include="Facades\SongFacade.cs" />
+    <Compile Include="Facades\Song_SonglistFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\AlbumQueries.cs" />
+    <Compile Include="Queries\AlbumReviewQueries.cs" />
+    <Compile Include="Queries\ArtistQueries.cs" />
+    <Compile Include="Queries\GenreQueries.cs" />
+    <Compile Include="Queries\Genre_AlbumQueries.cs" />
+    <Compile Include="Queries\ClientListQuery.cs" />
+    <Compile Include="Queries\SonglistQueries.cs" />
+    <Compile Include="Queries\SongQueries.cs" />
+    <Compile Include="Queries\SongReviewQueries.cs" />
+    <Compile Include="Queries\Song_SonglistQueries.cs" />
+    <Compile Include="Repositories\ArtistRepository.cs" />
+    <Compile Include="Repositories\Genre_AlbumRepository.cs" />
+    <Compile Include="Repositories\GenreRepository.cs" />
+    <Compile Include="Repositories\SonglistRepository.cs" />
+    <Compile Include="Repositories\Song_SonglistRepository.cs" />
+    <Compile Include="Repositories\SongRepository.cs" />
+    <Compile Include="Repositories\SongReviewRepository.cs" />
+    <Compile Include="Repositories\AlbumRepository.cs" />
+    <Compile Include="Repositories\AlbumReviewRepository.cs" />
+    <Compile Include="Repositories\UserAccount\ClientRepository.cs" />
+    <Compile Include="Repositories\UserAccount\UserAccountManager.cs" />
+    <Compile Include="Repositories\UserAccount\UserAccountRepository.cs" />
+    <Compile Include="Services\AlbumReviews\IAlbumReviewService.cs" />
+    <Compile Include="Services\AlbumReviews\AlbumReviewService.cs" />
+    <Compile Include="Services\Albums\IAlbumService.cs" />
+    <Compile Include="Services\Albums\AlbumService.cs" />
+    <Compile Include="Services\Artists\IArtistService.cs" />
+    <Compile Include="Services\Artists\ArtistService.cs" />
+    <Compile Include="Services\Genres\IGenreService.cs" />
+    <Compile Include="Services\Genres\GenreService.cs" />
+    <Compile Include="Services\Genre_Albums\IGenre_AlbumService.cs" />
+    <Compile Include="Services\Genre_Albums\Genre_AlbumService.cs" />
+    <Compile Include="Services\ICreator.cs" />
+    <Compile Include="Services\MusicLibraryService.cs" />
+    <Compile Include="Services\Songlists\ISonglistService.cs" />
+    <Compile Include="Services\Songlists\SonglistService.cs" />
+    <Compile Include="Services\SongReviews\ISongReviewService.cs" />
+    <Compile Include="Services\SongReviews\SongReviewService.cs" />
+    <Compile Include="Services\Songs\ISongService.cs" />
+    <Compile Include="Services\Songs\SongService.cs" />
+    <Compile Include="Services\Song_Songlists\ISong_SonglistService.cs" />
+    <Compile Include="Services\Song_Songlists\Song_SonglistService.cs" />
+    <Compile Include="Services\Clients\IClientService.cs" />
+    <Compile Include="Services\Clients\ClientService.cs" />
+    <Compile Include="Utils\AccountPolicy\Claims.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{dcd01155-c2ae-42b5-bc0e-af62aaedb23a}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Riganti.Utils.Infrastructure.Core\Riganti.Utils.Infrastructure.Core.csproj">
+      <Project>{43943d75-b4c8-4152-80cf-e6510bf3db23}</Project>
+      <Name>Riganti.Utils.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Riganti.Utils.Infrastructure.EntityFramework\Riganti.Utils.Infrastructure.EntityFramework.csproj">
+      <Project>{3c1e4be0-8351-461d-af36-746d726cfd48}</Project>
+      <Name>Riganti.Utils.Infrastructure.EntityFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

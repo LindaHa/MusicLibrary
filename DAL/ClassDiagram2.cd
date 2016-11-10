@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.Entities.Album" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAEAAQAAIAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Album.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Artist" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAACEAAAAA=</HashCode>
+      <FileName>Entities\Artist.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Genre" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAAEAAAAA=</HashCode>
+      <FileName>Entities\Genre.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Genre_Album" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAIAAAQAAAAAAAAAEAAACAAAAAA=</HashCode>
+      <FileName>Entities\Genre_Album.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Song" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAAAAAAACAAAAAAAAAAQAAAAAAAAAEACACAAAAAA=</HashCode>
+      <FileName>Entities\Song.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Song_Songlist" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACABAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Song_Songlist.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.Entities.Songlist" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Songlist.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Class Name="DAL.MusicLibraryDbContext" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIDentifier>
+      <HashCode>AAAAADAAIAAAAAAAAAYkBQAAEAAAAAAAAEAACAAAAAA=</HashCode>
+      <FileName>MusicLibraryDbContext.cs</FileName>
+    </TypeIDentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
