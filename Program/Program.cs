@@ -24,6 +24,11 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using BL.DTOs.Genres;
 using BL.DTOs.Filters;
 using BL.DTOs.AlbumReviews;
+using BL.DTOs.Genre_Albums;
+using BL.DTOs.Songs;
+using BL.DTOs.Songlists;
+using BL.DTOs.Song_Songlists;
+using BL.DTOs.SongReviews;
 
 namespace Program
 {
@@ -52,54 +57,13 @@ namespace Program
         private static SonglistFacade songlistFacade = new SonglistFacade(songlistService, songService, song_songlistService);
 
         private static int clientID, clientID2;
-        private static int songID;
-        private static int albumID;
-        private static int genreID;
-        private static int artistID;
-        private static int[] songlistIDs;
+        private static int songID, songID2, songlistID, songlistID2;
+        private static int albumID, genreID, artistID;
 
         static void Main(string[] args)
         {   
             InitializeWindsorContainerAndMapper();
-
-
-
-            //var userAccount = userAccountService.GetByUsername("Armin");
-
-            //// do the testing
-            //using (var context = new DAL.MusicLibraryDbContext())
-            //{
-            //    context.Users.Add(new UserAccount
-            //    {
-            //        UserName = "Guest"
-            //    });
-
-            //    context.Songs.Add(new Song
-            //    {
-            //        Name = "Hit the Floor",
-            //        IsOfficial = true,
-            //        Duration = new TimeSpan(0, 0, 3, 30),
-            //        Album = context.Albums
-            //        .Where(a => a.Name == "The Poison")
-            //        .First(),
-            //        Creator = context.Users
-            //        .Where(a => a.UserName == "Armin Admin")
-            //        .First(),
-            //    });
-
-
-            //    context.SaveChanges();
-            //}   
-
-            //using(var context = new MusicLibraryDbContext())
-            //{
-            //    DbSet<Song> songs = context.Songs;
-            //    foreach(Song song in songs)
-            //    {
-            //        string text = (song.IsOfficial ? "Can " : "Can't ") + "be found in our official Database.";
-            //        Console.WriteLine("the song " + song.Name + " from " + song.Album.Name + " by " + song.Album.Artist.Name + text);
-            //    }
-            //}
+           
             TestClientService();
             TestArtistService();
             //TestGenreService();
@@ -160,8 +124,8 @@ namespace Program
                 "ClientService - Test02 - OK" : "ClientService - Test02 - FAIL");
 
             //ListAllClients
-            var clients = clientService.ListAllClients(1);
-            Console.WriteLine(clients.TotalResultCount == 2 ? "ClientService - TestListAllClients - OK" : "ClientService - TestListAllClients - FAIL");
+            //var clients = clientService.ListAllClients(1);
+            //Console.WriteLine(clients.TotalResultCount == 2 ? "ClientService - TestListAllClients - OK" : "ClientService - TestListAllClients - FAIL");
 
             //EditClient
             matthew.FirstName = "Matthew";
@@ -209,12 +173,12 @@ namespace Program
                 CreatorID = clientID
             });
 
-            //GetArtistIdByEmail
+            //GetArtistIdByName
             artistID = artistService.GetArtistIdByName("Bullet For My Valentine");
             int violaID = artistService.GetArtistIdByName("Viola Martinsson");
             list.Add(artistID);
             list.Add(violaID);
-            Console.WriteLine(list.Count() == 2 ? "ClientService - GetArtistIdByEmail - OK" : "ClientService - GetArtistIdByEmail - FAIL");
+            Console.WriteLine(list.Count() == 2 ? "ClientService - GetArtistIdByName - OK" : "ClientService - GetArtistIdByName - FAIL");
                        
 
 
@@ -223,8 +187,8 @@ namespace Program
             Console.WriteLine(bfmv.Name == "Bullet For My Valentine" ? "ArtistService - TestGetArtisById - OK" : "ArtistService - TestGetArtisById - FAIL");
 
             //ListAllArtists01
-            var artists = artistService.ListAllArtists(new ArtistFilter { Name = "Viola Martinsson" }, 1);
-            Console.WriteLine(artists.TotalResultCount == 1 ? "ArtistService - TestListAllArtists01 - OK" : "ArtistService - TestListAllArtists01 - FAIL");
+           // var artists = artistService.ListAllArtists(new ArtistFilter { Name = "Viola Martinsson" }, 1);
+           // Console.WriteLine(artists.TotalResultCount == 1 ? "ArtistService - TestListAllArtists01 - OK" : "ArtistService - TestListAllArtists01 - FAIL");
 
             //ListAllArtists02 
             var artists2 = artistService.ListAllArtists();
@@ -269,18 +233,18 @@ namespace Program
                 CreatorID = clientID
             });
 
-            //GetGenreIdByEmail
+            //GetGenreIdByName
             genreID = genreService.GetGenreIdByName("Metalcore");
             int indieID = genreService.GetGenreIdByName("Indie pop");
             list.Add(genreID);
             list.Add(indieID);
-            Console.WriteLine(list.Count() == 2 ? "ClientService - GetGenreIdByEmail - OK" : "ClientService - GetGenreIdByEmail - FAIL");
+            Console.WriteLine(list.Count() == 2 ? "ClientService - GetGenreIdByName - OK" : "ClientService - GetGenreIdByName - FAIL");
 
 
 
             //GetGenreById
             GenreDTO metalcore = genreService.GetGenre(genreID);
-            Console.WriteLine(metalcore.Name == "Metalcore" ? "GenreService - TestGetArtisById - OK" : "GenreService - TestGetArtisById - FAIL");
+            Console.WriteLine(metalcore.Name == "Metalcore" ? "GenreService - GetGenreById - OK" : "GenreService - GetGenreById - FAIL");
 
             //ListAllGenres01
             //var genres = genreService.ListAllGenres(new GenreFilter { ArtistID = artistID }, 1);
@@ -329,17 +293,17 @@ namespace Program
             });
 
             
-            //GetAlbumIdByEmail
+            //GetAlbumIdByName
             albumID = albumService.GetAlbumIdByName("The Poison");
             int venomID = albumService.GetAlbumIdByName("Indie pop");
             list.Add(albumID);
             list.Add(venomID);
-            Console.WriteLine(list.Count() == 2 ? "ClientService - GetAlbumIdByEmail - OK" : "ClientService - GetAlbumIdByEmail - FAIL");
+            Console.WriteLine(list.Count() == 2 ? "ClientService - GetAlbumIdByName - OK" : "ClientService - GetAlbumIdByName - FAIL");
             
             //GetAlbumById
             AlbumDTO poison = albumService.GetAlbum(albumID);
             AlbumDTO venom = albumService.GetAlbum(venomID);
-            Console.WriteLine(poison.Name == "The Poison" ? "AlbumService - TestGetArtisById - OK" : "AlbumService - TestGetArtisById - FAIL");
+            Console.WriteLine(poison.Name == "The Poison" ? "AlbumService - GetAlbumById - OK" : "AlbumService - GetAlbumById - FAIL");
 
             artistService = Container.Resolve<IArtistService>();
 
@@ -367,7 +331,7 @@ namespace Program
             //Console.WriteLine(albums.TotalResultCount == 1 ? "AlbumService - TestListAllAlbums - OK" : "AlbumService - TestListAllAlbums - FAIL");
 
             //ListAllAlbumss02
-            var albums2 = genreService.ListAllGenres();
+            var albums2 = albumService.ListAllAlbums();
             Console.WriteLine(albums2.Count() == 2 ? "AlbumService - ListAllAlbumss02 - OK" : "AlbumService - ListAllAlbumss02 - FAIL");
 
             //EditAlbum
@@ -383,57 +347,419 @@ namespace Program
 
             //GetCreator
             ClientDTO creator = genreService.GetCreator(poison.ID);
-            Console.WriteLine(creator.ID == clientID ? "AlbumService - GetCreator - OK" : "AlbumService - GetCreator - FAIL");
-
-            
+            Console.WriteLine(creator.ID == clientID ? "AlbumService - GetCreator - OK" : "AlbumService - GetCreator - FAIL");            
         }
 
         private static void TestAlbumReview()
         {
-          }
+            List<int> list = new List<int>();
+            albumReviewService = Container.Resolve<IAlbumReviewService>();
+            clientService = Container.Resolve<IClientService>();
 
-        private static void TestSongService()
-        {
-            
-
-            songService = Container.Resolve<ISongService>();
-
-            songService.GetSong(1);
-
-            songService.AddSong(new BL.DTOs.Songs.SongDTO
+            //Create
+            albumReviewService.CreateAlbumReview(new AlbumReviewDTO
             {
-                Name = "My sexy back",
-                Duration = 1.2f,
-                IsOfficial = false,
-                AlbumID = 1
+                Text = "This disc is a great improvement on an already brilliant EP, keeping the same style with great screams and guitars and improving melodically, lyrically and each song delivering a catchy chorus.",
+                AlbumID = albumID,
+                CreatorID = clientID,
             });
+            albumReviewService.CreateAlbumReview(new AlbumReviewDTO
+            {
+                Text = "I remember listening to The Poison, 10 years ago when this style of metalcore was at an incredibly high popularity. I definitely didn’t hate it but still preferred to listen to other bands of even similar genres.",
+                AlbumID = albumID,
+                CreatorID = clientID2,
+            });
+
+            //ListAllAlbumReviews
+            var albumReviews = albumReviewService.ListAllAlbumReviews(new AlbumReviewFilter { AlbumID = albumID }, 1);
+            Console.WriteLine(albumReviews.TotalResultCount == 2 ? "AlbumReviewService - TestListAllAlbumReviews - OK" : "AlbumReviewService - TestListAllAlbumReviews - FAIL");
+            
+            //GetAlbumReviewById
+            var reviews = albumReviewService.ListAllAlbumReviews(new AlbumReviewFilter { CreatorIDs = new int[] { clientID } }, 1);
+            AlbumReviewDTO albumReview = reviews.ResultsPage.FirstOrDefault();
+            var testedReview = albumReviewService.GetAlbumReview(albumReview.ID);
+            Console.WriteLine(testedReview.ID == albumReview.ID ? "AlbumReviewService - TestGetAlbumReviewById - OK" : "AlbumReviewService - TestGetAlbumReviewById - FAIL");
+        
+            //AddAlbumReview
+            reviews = albumReviewService.ListAllAlbumReviews(new AlbumReviewFilter { CreatorIDs = new int[] { clientID2 } }, 1);
+            AlbumReviewDTO review2 = reviews.ResultsPage.FirstOrDefault();
+            albumReviewService.AddReview(albumReview);
+            albumReviewService.AddReview(review2);
+            AlbumDTO album = albumService.GetAlbum(albumID);
+            Console.WriteLine(album.ReviewIDs.Contains(review2.ID) ?
+                "AlbumReviewService - TestAddAlbumReview - OK" : "AlbumReviewService - TestAddAlbumReview - FAIL");
+
+            //TestAlbumServisGetAllAlbumReviews            
+            Console.WriteLine(album.ReviewIDs.Count() == 2 ?
+            "AlbumService - TestAlbumServisGetAllAlbumReviews - OK" : "AlbumService - TestAlbumServisGetAllAlbumReviews - FAIL");
+                        
+            //EditAlbumReview
+            review2.Text = "1010";
+            albumReviewService.EditAlbumReview(review2);
+            AlbumReviewDTO review2FromDB = albumReviewService.GetAlbumReview(review2.ID);
+            Console.WriteLine(review2FromDB.Text == "1010" ? "AlbumReviewService - TestEditAlbumReview - OK" : "AlbumReviewService - TestEditAlbumReview - FAIL");
+
+            //DeleteAlbumReview
+            albumReviewService.DeleteAlbumReview(review2.ID);
+            AlbumReviewDTO venomFromDB = albumReviewService.GetAlbumReview(review2.ID);
+            Console.WriteLine(venomFromDB == null ? "AlbumReviewService - TestDeleteAlbumReview - OK" : "AlbumReviewService - TestDeleteAlbumReview - FAIL");
+
+            //GetCreator
+            ClientDTO creator = albumReviewService.GetCreator(albumReview.ID);
+            Console.WriteLine(creator.ID == clientID ? "AlbumReviewService - TestGetCreator - OK" : "AlbumReviewService - TestGetCreator - FAIL");
 
         }
 
-        //private static void TestAlbumService()
-        //{
-        //    albumService = Container.Resolve<IAlbumService>();
+        private static void TestGenre_AlbumService()
+        {
+            List<int> list = new List<int>();
+            genre_albumService = Container.Resolve<IGenre_AlbumService>();
+            clientService = Container.Resolve<IClientService>();
 
-        //    //Create
-        //    albumService.CreateAlbum(new AlbumDTO { Name = "The Poison",
-        //                                                });
-        //    album1Id = albumService.GetProductAlbumIdByName("Electronics");
-        //    albumService.CreateAlbum(new AlbumDTO { Name = "Telephones", ParentID = null });
-        //    album2Id = albumService.GetProductAlbumIdByName("Telephones");
-        //    albumService.CreateAlbum(new AlbumDTO { Name = "Smart phones", ParentID = album2Id });
-        //    album3Id = albumService.GetProductAlbumIdByName("Smart phones");
+            //Create
+            genre_albumService.CreateGenre_Album(new Genre_AlbumDTO
+            {
+                GenreID = genreID,
+                AlbumID = albumID,
+                IsOfficial = true,
+                CreatorID = clientID,
+            });
+            genre_albumService.CreateGenre_Album(new Genre_AlbumDTO
+            {
+                GenreID = genreID,
+                AlbumID = albumID,
+                IsOfficial = true,
+                CreatorID = clientID2,
+            });            
+            
+            //ListAllGenre_Albums
+            var genre_albums = genre_albumService.ListAllGenre_Albums();
+            Console.WriteLine(genre_albums.Count() == 2 ? "Genre_AlbumService - ListAllGenre_Albums - OK" : "Genre_AlbumService - ListAllGenre_Albums - FAIL");
 
-        //    //Rename and Change parent
-        //    albumService.EditAlbum(new AlbumDTO { ID = album2Id, Name = "Phones", ParentID = album1Id });
+            //GetGenre_AlbumById
+            Genre_AlbumDTO song_songlist = genre_albums.FirstOrDefault();
+            Genre_AlbumDTO song_songlist2 = genre_albums.LastOrDefault();
+            Genre_AlbumDTO testedGenre = genre_albumService.GetGenre_Album(song_songlist.ID);
+            Console.WriteLine(testedGenre.ID == song_songlist.ID ? "Genre_AlbumService - GetGenre_AlbumById - OK" : "Genre_AlbumService - GetGenre_AlbumById - FAIL");
 
-        //    //GetAlbumPath
-        //    var list = albumService.GetAlbumPath(album3Id);
-        //    Console.WriteLine(list.Count() == 3 ? "AlbumService - Test01 - OK" : "AlbumService - Test01 - FAIL");
+            //EditGenre_Album
+            song_songlist2.CreatorID = clientID;
+            genre_albumService.EditGenre_Album(song_songlist2, albumID, genreID);
+            Genre_AlbumDTO bfmvFromDB = genre_albumService.GetGenre_Album(song_songlist2.ID);
+            Console.WriteLine(bfmvFromDB.CreatorID == clientID ? "Genre_AlbumService - TestEditGenre_Album - OK" : "Genre_AlbumService - TestEditGenre_Album - FAIL");
+                        
+            //DeleteGenre_Album
+            int g_aID = song_songlist2.ID;
+            genre_albumService.DeleteGenre_Album(song_songlist2.ID);
+            song_songlist2 = genre_albumService.GetGenre_Album(g_aID);
+            Console.WriteLine(song_songlist2 == null ? "Genre_AlbumService - TestDeleteGenre_Album - OK" : "Genre_AlbumService - TestDeleteGenre_Album - FAIL");
 
-        //    var categories = albumService.ListAllCategories();
+            //GetCreator
+            ClientDTO creator = genre_albumService.GetCreator(song_songlist.ID);
+            Console.WriteLine(creator.ID == clientID ? "Genre_AlbumService - GetCreator - OK" : "Genre_AlbumService - GetCreator - FAIL");
 
-        //    //Delete
-        //    albumService.DeleteAlbum(album3Id);
-        //}
+            //GetAllGenresForAlbum
+
+            var genres = genre_albumService.GetAllGenresForAlbum(albumID);
+            Console.WriteLine(genres.Count() == 1 ? "Genre_AlbumService - GetAllGenresForAlbum - OK" : "Genre_AlbumService - GetAllGenresForAlbum - FAIL");
+
+            //GetAllAlbumsForGenre
+
+            var albums = genre_albumService.GetAllAlbumsForGenre(genreID);
+            Console.WriteLine(albums.Count() == 1 ? "Genre_AlbumService - GetAllAlbumsForGenre - OK" : "Genre_AlbumService - GetAllAlbumsForGenre - FAIL");
+
+        }
+
+        private static void TestSongService()
+        {
+            List<int> list = new List<int>();
+            songService = Container.Resolve<ISongService>();
+            clientService = Container.Resolve<IClientService>();
+
+            //Create
+            songService.CreateSong(new SongDTO
+            {
+                Name = "Hit The Floor",
+                AlbumID = albumID,
+                CreatorID = clientID,
+                Duration = new TimeSpan(0, 0, 3, 30),
+                IsOfficial = true,
+            });
+            songService.CreateSong(new SongDTO
+            {
+                Name = "4 Words",
+                AlbumID = albumID,
+                CreatorID = clientID,
+                Duration = new TimeSpan(0, 0, 3, 43),
+                IsOfficial = true,
+            });
+            songService.CreateSong(new SongDTO
+            {
+                Name = "All These Things I Hate",
+                AlbumID = albumID,
+                CreatorID = clientID2,
+                Duration = new TimeSpan(0, 0, 3, 45),
+                IsOfficial = true,
+            });
+
+
+            //GetSongIdByName
+            songID = songService.GetSongIdByName("Hit The Floor");
+            int wordsID = songService.GetSongIdByName("4 Words");
+            songID2 = songService.GetSongIdByName("All These Things I Hate");
+            list.Add(songID);
+            list.Add(wordsID);
+            list.Add(songID2);
+            Console.WriteLine(list.Count() == 3 ? "ClientService - GetSongIdByName - OK" : "ClientService - GetSongIdByName - FAIL");
+
+            //GetSongById
+            SongDTO floor = songService.GetSong(songID);
+            SongDTO words4 = songService.GetSong(wordsID);
+            SongDTO hate = songService.GetSong(songID2);
+            Console.WriteLine(floor.Name == "Hit The Floor" ? "SongService - GetSongById - OK" : "SongService - GetSongById - FAIL");
+
+            albumService = Container.Resolve<IAlbumService>();
+
+            //AddSong
+            songService.AddSong(floor);
+            songService.AddSong(words4);
+            songService.AddSong(hate);
+            AlbumDTO album = albumService.GetAlbum(albumID);
+            Console.WriteLine(album.SongIDs.Contains(songID) ?
+                "SongService - AddSong - OK" : "SongService - AddSong - FAIL");
+
+            //GetAlbumOfSong
+            AlbumDTO album2 = songService.GetAlbumOfSong(songID);
+            Console.WriteLine(album2.ID == albumID ?
+                "SongService - GetAlbumOfSong - OK" : "SongService - GetAlbumOfSong - FAIL");
+
+            //TestAlbumServisGetAllSongs            
+            Console.WriteLine(album.SongIDs.Count() == 3 ?
+            "AlbumService - TestAlbumServisGetAllSongs - OK" : "AlbumService - TestAlbumServisGetAllSongs - FAIL");
+
+            ////ListAllSongs
+            //var songs = songService.ListAllSongs(new SongFilter { AlbumID = albumID }, 1);
+            //Console.WriteLine(songs.TotalResultCount == 3 ? "SongService - TestListAllSongs - OK" : "SongService - TestListAllSongs - FAIL");
+
+            //ListAllSongss02
+            var songs2 = songService.ListAllSongs();
+            Console.WriteLine(songs2.Count() == 3 ? "SongService - ListAllSongss02 - OK" : "SongService - ListAllSongss02 - FAIL");
+
+            //EditSong
+            words4.Name = "Four Words";
+            songService.EditSong(words4, albumID);
+            SongDTO words4FromDB = songService.GetSong(words4.ID);
+            Console.WriteLine(words4FromDB.Name == "Four Words" ? "SongService - TestEditSong - OK" : "SongService - TestEditSong - FAIL");
+
+            //DeleteSong
+            songService.DeleteSong(wordsID);
+            SongDTO wordsFromDB = songService.GetSong(wordsID);
+            Console.WriteLine(wordsFromDB == null ? "SongService - TestDeleteSong - OK" : "SongService - TestDeleteSong - FAIL");
+
+            //GetCreator
+            ClientDTO creator = genreService.GetCreator(floor.ID);
+            Console.WriteLine(creator.ID == clientID ? "SongService - GetCreator - OK" : "SongService - GetCreator - FAIL");
+        }
+
+        private static void TestSonglistService()
+        {
+            List<int> list = new List<int>();
+            songlistService = Container.Resolve<ISonglistService>();
+            clientService = Container.Resolve<IClientService>();
+
+            //Create
+            songlistService.CreateSonglist(new SonglistDTO
+            {
+                Name = "Matthew:LongList",
+                OwnerID = clientID,
+                SongIDs = new int[] { songID, songID2 }
+            });
+            songlistService.CreateSonglist(new SonglistDTO
+            {
+                Name = "Matthew:ShortList",
+                OwnerID = clientID,
+                SongIDs = new int[] { songID}
+            });
+            songlistService.CreateSonglist(new SonglistDTO
+            {
+                Name = "Padge:ShortList",
+                OwnerID = clientID2,
+                SongIDs = new int[] { songID}
+            });
+
+            //GetSonglistIdByName
+            songlistID = songlistService.GetSonglistIdByName("Matthew:LongList");
+            int mattShortListID = songlistService.GetSonglistIdByName("Matthew:ShortList");
+            songlistID2 = songlistService.GetSonglistIdByName("Padge:ShortList");
+            list.Add(songlistID);
+            list.Add(mattShortListID);
+            list.Add(songlistID2);
+            Console.WriteLine(list.Count() == 3 ? "ClientService - TestGetSonglistIdByName - OK" : "ClientService - TestGetSonglistIdByName - FAIL");
+
+
+
+            //GetSonglistById
+            SonglistDTO mattLongList = songlistService.GetSonglist(songlistID);
+            Console.WriteLine(mattLongList.Name == "Matthew:LongList" ? "SonglistService - TestGetSonglistById - OK" : "SonglistService - TestGetSonglistById - FAIL");
+
+            ////ListAllSonglists01
+            // var songlists = songlistService.ListAllSonglists(new SonglistFilter { OwnerID = clientID }, 1);
+            //Console.WriteLine(songlists.TotalResultCount == 2 ? "SonglistService - TestListAllSonglists01 - OK" : "SonglistService - TestListAllSonglists01 - FAIL");
+
+            //ListAllSonglists02 
+            var songlists2 = songlistService.ListAllSonglists();
+            Console.WriteLine(list.Count() == 3 ? "ClientService - TestListAllSonglists02 - OK" : "ClientService - TestListAllSonglists02 - FAIL");
+
+
+            //EditSonglist
+            mattLongList.Name = "longLongList";
+            songlistService.EditSonglist(mattLongList);
+            SonglistDTO listFromDB = songlistService.GetSonglist(mattLongList.ID);
+            Console.WriteLine(listFromDB.Name == "longLongList" ? "SonglistService - TestEditSonglist - OK" : "SonglistService - TestEditSonglist - FAIL");
+
+            //DeleteSonglist
+            songlistService.DeleteSonglist(mattShortListID);
+            SonglistDTO listIDFromDB = songlistService.GetSonglist(mattShortListID);
+            Console.WriteLine(listIDFromDB == null ? "SonglistService - TestDeleteSonglist - OK" : "SonglistService - TestDeleteSonglist - FAIL");
+
+            //GetCreator
+            ClientDTO creator = songlistService.GetCreator(mattLongList.ID);
+            Console.WriteLine(creator.ID == clientID ? "SonglistService - TestGetCreator - OK" : "SonglistService - TestGetCreator - FAIL");
+
+            //GetSonglistSongs
+            var songs = songlistService.GetSonglistSongs(songlistID);
+            Console.WriteLine(songs.Count() == 2 ? "SonglistService - TestGetSonglistSongs - OK" : "SonglistService -Test GetSonglistSongs - FAIL");
+        }
+
+        private static void TestSong_Songlist()
+        {
+            List<int> list = new List<int>();
+            song_songlistService = Container.Resolve<ISong_SonglistService>();
+            clientService = Container.Resolve<IClientService>();
+
+            //Create
+            song_songlistService.CreateSong_Songlist(new Song_SonglistDTO
+            {
+                SongID = songID,
+                SonglistID = songlistID,
+                CreatorID = clientID
+            });
+            song_songlistService.CreateSong_Songlist(new Song_SonglistDTO
+            {
+                SongID = songID2,
+                SonglistID = songlistID,
+                CreatorID = clientID                
+            });
+            song_songlistService.CreateSong_Songlist(new Song_SonglistDTO
+            {
+                SongID = songID,
+                SonglistID = songlistID2,
+                CreatorID = clientID2
+            });
+
+            //ListAllSong_Songlists
+            var song_songlists = song_songlistService.ListAllSong_Songlists();
+            Console.WriteLine(song_songlists.Count() == 3 ? "Song_SonglistService - TestListAllSong_Songlists - OK" : "Song_SonglistService - TestListAllSong_Songlists - FAIL");
+
+            //GetSong_SonglistById
+            Song_SonglistDTO song_songlist = song_songlists.FirstOrDefault();
+            Song_SonglistDTO song_songlist2 = song_songlists.ElementAt(1);
+            Song_SonglistDTO testedSong = song_songlistService.GetSong_Songlist(song_songlist.ID);
+            Console.WriteLine(testedSong.ID == song_songlist.ID ? "Song_SonglistService - TestGetSong_SonglistById - OK" : "Song_SonglistService - TestGetSong_SonglistById - FAIL");
+
+            //EditSong_Songlist
+            song_songlist2.CreatorID = clientID;
+            song_songlistService.EditSong_Songlist(song_songlist2, song_songlist2.SonglistID, song_songlist2.SongID);
+            Song_SonglistDTO s_sFromDB = song_songlistService.GetSong_Songlist(song_songlist2.ID);
+            Console.WriteLine(s_sFromDB.CreatorID == clientID ? "Song_SonglistService - TestEditSong_Songlist - OK" : "Song_SonglistService - TestEditSong_Songlist - FAIL");
+
+            //DeleteSong_Songlist
+            int s_sID = song_songlist2.ID;
+            song_songlistService.DeleteSong_Songlist(song_songlist2.ID);
+            song_songlist2 = song_songlistService.GetSong_Songlist(s_sID);
+            Console.WriteLine(song_songlist2 == null ? "Song_SonglistService - TestDeleteSong_Songlist - OK" : "Song_SonglistService - TestDeleteSong_Songlist - FAIL");
+
+            //GetCreator
+            ClientDTO creator = song_songlistService.GetCreator(song_songlist.ID);
+            Console.WriteLine(creator.ID == clientID ? "Song_SonglistService - TestGetCreator - OK" : "Song_SonglistService - TestGetCreator - FAIL");
+
+            //GetAllSongsForSonglist
+            var songs = song_songlistService.GetAllSongsForSonglist(songlistID);
+            Console.WriteLine(songs.Count() == 2 ? "Song_SonglistService - TestGetAllSongsForSonglist - OK" : "Song_SonglistService - TestGetAllSongsForSonglist - FAIL");
+
+            //GetAllSonglistsForSong
+            var songlists = song_songlistService.GetAllSonglistsForSong(songID);
+            Console.WriteLine(songlists.Count() == 2 ? "Song_SonglistService - TestGetAllSonglistsForSong - OK" : "Song_SonglistService - TestGetAllSonglistsForSong - FAIL");
+
+        }
+
+        private static void TestSongReview()
+        {
+            List<int> list = new List<int>();
+            songReviewService = Container.Resolve<ISongReviewService>();
+            clientService = Container.Resolve<IClientService>();
+
+            //Create
+            songReviewService.CreateSongReview(new SongReviewDTO
+            {
+                Text = "Reminds me of my dreaded youth.",
+                SongID = songID,
+                CreatorID = clientID,
+                
+            });
+            songReviewService.CreateSongReview(new SongReviewDTO
+            {
+                Text = "One of the best songs, on their best album!",
+                SongID = songID,
+                CreatorID = clientID2,
+            });
+            songReviewService.CreateSongReview(new SongReviewDTO
+            {
+                Text = "This video actually makes sense unlike other songs, and the video matches the lyrics 2 boot! I LOVE IT!!! sry, sugar rush (still worst joke ever) sry, but anyway, this video is very good, SO GOOD!!! ",
+                SongID = songID2,
+                CreatorID = clientID,
+            });
+
+            //ListAllSongReviews
+            var songReviews = songReviewService.ListAllSongReviews(new SongReviewFilter { SongID = songID }, 1);
+            Console.WriteLine(songReviews.TotalResultCount == 2 ? "SongReviewService - TestListAllSongReviews - OK" : "SongReviewService - TestListAllSongReviews - FAIL");
+
+            //GetSongReviewById
+            var reviews = songReviewService.ListAllSongReviews(null, 1);
+            SongReviewDTO songReview = reviews.ResultsPage.FirstOrDefault();
+            var testedReview = songReviewService.GetSongReview(songReview.ID);
+            Console.WriteLine(testedReview.ID == songReview.ID ? "SongReviewService - TestGetSongReviewById - OK" : "SongReviewService - TestGetSongReviewById - FAIL");
+
+            //AddSongReview
+            SongReviewDTO review2 = reviews.ResultsPage.ElementAt(1);
+            SongReviewDTO review3 = reviews.ResultsPage.LastOrDefault();
+            reviews = songReviewService.ListAllSongReviews(null, 1);
+            songReview = reviews.ResultsPage.ElementAt(1);
+            songReviewService.AddReview(songReview);
+            songReviewService.AddReview(review2);
+            songReviewService.AddReview(review3);
+            SongDTO song = songService.GetSong(songID);
+            Console.WriteLine(song.ReviewIDs.Contains(songReview.ID) ?
+                "SongReviewService - TestAddSongReview - OK" : "SongReviewService - TestAddSongReview - FAIL");
+
+            //TestSongServisGetAllSongReviews            
+            Console.WriteLine(song.ReviewIDs.Count() == 2 ?
+            "SongService - TestSongServisGetAllSongReviews - OK" : "SongService - TestSongServisGetAllSongReviews - FAIL");
+
+            //EditSongReview
+            review2.Text = "1010";
+            songReviewService.EditSongReview(review2);
+            SongReviewDTO review2FromDB = songReviewService.GetSongReview(review2.ID);
+            Console.WriteLine(review2FromDB.Text == "1010" ? "SongReviewService - TestEditSongReview - OK" : "SongReviewService - TestEditSongReview - FAIL");
+
+            //DeleteSongReview
+            songReviewService.DeleteSongReview(review2.ID);
+            SongReviewDTO reviewFromDB = songReviewService.GetSongReview(review2.ID);
+            Console.WriteLine(reviewFromDB == null ? "SongReviewService - TestDeleteSongReview - OK" : "SongReviewService - TestDeleteSongReview - FAIL");
+
+            //GetCreator
+            ClientDTO creator = songReviewService.GetCreator(songReview.ID);
+            Console.WriteLine(creator.ID == clientID ? "SongReviewService - TestGetCreator - OK" : "SongReviewService - TestGetCreator - FAIL");
+        }
     }
 }

@@ -68,7 +68,7 @@ namespace BL.Bootstrap
                     //.ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.Account.Email))
                     //.ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.Account.FirstName))
                     //.ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.Account.LastName))
-                    .ForMember(clientDTO => clientDTO.SonglistIDs, opts => opts.MapFrom(client => client.Songlists.Select(songlist => songlist.ID)))
+                    .ForMember(clientDTO => clientDTO.SonglistIDs, opts => opts.MapFrom(client => client.Songlists.Select(songlist => songlist.ID)))   
                     .ReverseMap();
             });
         }

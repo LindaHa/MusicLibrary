@@ -16,7 +16,7 @@ namespace BL.DTOs.Songs
         public string Name { get; set; }
 
         [Required]
-        public double Duration { get; set; }
+        public TimeSpan Duration { get; set; }
 
         [Required]
         public bool IsOfficial { get; set; }
